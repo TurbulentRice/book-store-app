@@ -1,0 +1,1 @@
+// Main search bar, persistent across all routes
