@@ -8,8 +8,8 @@ export default function Login() {
   const { login } = useContext(UserContext);
   const history = useHistory();
 
-  const [username, setUsername] = useState("username");
-  const [password, setPassword] = useState("password");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -39,39 +39,44 @@ export default function Login() {
   }
 
   return (
-    <div className="wrapper fadeInDown">
-      <div id="formContent">
+    <div className="row justify-content-center fadeInDown">
+    <div className="col-4 text-center fadeInDown">
+        <form className="form-signin" onSubmit={handleSubmit}>
 
-        <div className="fadeIn first">
-          <img src={logo} id="icon" alt="Novella" height='40'/>
-        </div>
+          <div className="m-4">
+            <img src={logo} id="icon" alt="Novella" height='80'/>
+          </div>
 
-        <form onSubmit={handleSubmit}>
+          <h1 className="h3 mb-3 font-weight-normal">Welcome!</h1>
+
+          <label htmlFor="inputUsername" className="sr-only">Username</label>
           <input
-            type="text"
-            id="username"
-            className="fadeIn second"
-            name="username"
-            placeholder="username"
+            type="username"
+            id="inputUsername"
+            className="form-control mb-2"
+            placeholder="Username"
+            required={true}
+            autoFocus=""
             value={username}
             onChange={e => setUsername(e.target.value)}/>
+
+          <label htmlFor="inputPassword" className="sr-only">Password</label>
           <input
-            type="text"
-            id="password"
-            className="fadeIn third"
-            name="password"
-            placeholder="password"
+            type="password"
+            id="inputPassword"
+            className="form-control mb-2"
+            placeholder="Password"
+            required={true}
             value={password}
             onChange={e => setPassword(e.target.value)} />
-          <input type="submit" className="fadeIn fourth" value="Log In" />
+
+          <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+          <p className="mt-5 mb-3 text-muted">© 2017-2018</p>
         </form>
 
         {errorMessage && <div>{errorMessage}</div>}
-        {/* <div id="formFooter">
-          <p className="underlineHover" href="#">Forgot Password?</p>
-        </div> */}
-
-      </div>
+        {isLoading && <div>Loading...</div>}
+    </div>
     </div>
   )
 }
