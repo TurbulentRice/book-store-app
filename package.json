@@ -22,5 +22,8 @@
   "devDependencies": {
     "chai": "^4.3.4",
     "mocha": "^8.3.2"
+  },
+  "engines": {
+    "node": "v12.21.0"
   }
 }
