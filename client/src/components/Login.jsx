@@ -19,8 +19,8 @@ export default function Login({ logo }) {
     setErrorMessage("")
     try {
       const response = await API.login(username, password)
+      // Thought throwing/catching manually would stop 401 error in console, it didn't, but this works anyway
       if (response.status) throw response;
-      // Success - set state, clear input, redirect
       setIsLoading(false);
       setErrorMessage("");
       login(response.token);
@@ -45,7 +45,7 @@ export default function Login({ logo }) {
             <img src={logo} id="icon" alt="Novella" height='80'/>
           </div>
 
-          <h1 className="h3 mb-3 font-weight-normal">Welcome!</h1>
+          <h1 className="h3 mb-3 font-weight-normal">Welcome to Novella!</h1>
 
           <label htmlFor="inputUsername" className="sr-only">Username</label>
           <input
@@ -69,6 +69,8 @@ export default function Login({ logo }) {
             onChange={e => setPassword(e.target.value)} />
 
           <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
+          <p className="mt-5 mb-3 text-muted">app by Sean Russell 2021</p>
         </form>
 
         {errorMessage && <div>{errorMessage}</div>}
