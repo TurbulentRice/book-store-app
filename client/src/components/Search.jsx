@@ -5,36 +5,39 @@ import imgErrorIcon from '../images/img_unavailable.png';
 import API from '../api.js';
 
 export default function Search() {
-  // User context for token and keeping track of searches
+  // User context for token and keeping track of search even when user navs away
   const { token,
     searchString, setSearchString,
     searchResults, setSearchResults } = useContext(UserContext)
   
   let history = useHistory()
-  
-  // TODO
-  //
-  // Time searches, setInterval, reset every key change?
-  // On input, listen for 200ms, if interrupted by another onChange, reset counter
-  //
 
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
+    // Only update state if component is mounted
+    // This is to prevent "Warning: Can't perform a React state update on an unmounted component."
+    let isMounted = true;
+
     errorMessage && setErrorMessage("")
     searchString && setIsLoading(true)
     searchString
-      ? API.search(searchString, token).then(results => {
-        results.message && setErrorMessage(results.message)
-        results.books && setSearchResults(results.books) 
-        setIsLoading(false)
+      ? API.search(searchString.trimEnd().replace(/\s/g, '+'), token).then(results => {
+        if (isMounted) {
+          results.message && setErrorMessage(results.message)
+          results.books && setSearchResults(results.books) 
+          setIsLoading(false)
+        }
       })
-      : setSearchResults([])
+      : isMounted && setSearchResults([])
+
+    // Cleanup function disables setting state when component unmounted
+    return () => isMounted = false
     
-  // Ignoring this error
-  // "React Hook useEffect has missing dependencies: 'errorMessage' and 'setSearchResults'.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // Ignoring this error because it's annoying:
+    // "React Hook useEffect has missing dependencies: 'errorMessage' and 'setSearchResults'.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchString, token])
 
   const handleOpenBook = (bookID) => {
