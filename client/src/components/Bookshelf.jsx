@@ -7,7 +7,7 @@ import API from '../api.js';
 // Display user's "shelves"
 
 // In charge of books?
-export default function BookShelf() {
+export default function Bookshelf() {
   const { token } = useContext(UserContext)
   const { isLoading, error, data } = useQuery('bookshelf', () => API.getBookshelf(token))
 

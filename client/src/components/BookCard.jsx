@@ -23,7 +23,7 @@ export default function BookCard({ book, shelfKey }) {
   })
 
   return (
-    <div className="book-card">
+    <div className="book-card mb-2">
       <div className="card-body p-1">
 
         {/* Book title and author(s) */}
@@ -43,7 +43,10 @@ export default function BookCard({ book, shelfKey }) {
         <div className="form-group row ml-0">
 
           {/* Thumbnail */}
-          <img className="book-thumbnail m-2" src={book.imageLinks ? book.imageLinks.thumbnail || book.imageLinks.smallThumbnail || imgErrorIcon : imgErrorIcon} alt={book.title}/>
+          <img className="book-thumbnail m-2"
+            onClick={handleOpenBook}
+            src={book.imageLinks ? book.imageLinks.thumbnail || book.imageLinks.smallThumbnail || imgErrorIcon : imgErrorIcon}
+            alt={book.title}/>
 
           {/* Change shelf */}
           <div className="col mr-4 ml-0">

@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 
 import Login from '../components/Login';
-import BookShelf from '../components/BookShelf';
+import Bookshelf from '../components/Bookshelf';
 import Search from '../components/Search';
 import Navbar from '../components/Navbar';
 import BookDetails from '../components/BookDetails';
@@ -24,7 +24,7 @@ export default function AppRouter() {
         </Route>
 
         <ProtectedRoute exact path="/bookshelf">
-          <BookShelf />
+          <Bookshelf />
         </ProtectedRoute>
 
         <ProtectedRoute exact path="/search">
