@@ -1,7 +1,7 @@
-import { UserContextProvider } from './contexts/UserContext'
-import AppRouter from './routes/AppRouter';
+import { UserContextProvider } from '../contexts/UserContext'
+import AppRouter from '../routes/AppRouter';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { BooksContextProvider } from './contexts/BooksContext';
+import { BooksContextProvider } from '../contexts/BooksContext';
 
 const queryClient = new QueryClient()
 
