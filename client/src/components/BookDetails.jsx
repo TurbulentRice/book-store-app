@@ -17,11 +17,11 @@ export default function BookDetails() {
   // Maybe query "ID" should be book id?
   // That way we can use invalidation dynamicall for each viewBook req
   const { isLoading, error, data } = useQuery(bookID, () => API.viewBook(bookID, token))
+  
   if (isLoading) return "Loading..."
   if (error) return "An error occurred while fetching data."
 
   const { book } = data
-  console.log(book)
   return (
     <div className="container m-4">
       <h2>{book.title}</h2>

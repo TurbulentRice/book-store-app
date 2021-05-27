@@ -1,4 +1,3 @@
-import { useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../contexts/UserContext';
@@ -21,7 +20,6 @@ export default function Search() {
     searchString && setIsLoading(true)
     searchString
       ? API.search(searchString, token).then(results => {
-        console.log(results)
         results.message && setErrorMessage(results.message)
         results.books && setSearchResults(results.books) 
         setIsLoading(false)
@@ -33,9 +31,6 @@ export default function Search() {
   const handleOpenBook = (bookID) => {
     history.push(`book/${bookID}`)
   }
-
-  console.log('searchResults: ', searchResults)
-  console.log('errorMessage: ', errorMessage)
 
   return (
     <div className="container m-4">

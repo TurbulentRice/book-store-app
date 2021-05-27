@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { useQuery } from 'react-query';
 import { UserContext } from '../contexts/UserContext';
-// import { BooksContext } from '../contexts/BooksContext';
 import Shelf from './Shelf'
 import API from '../api.js';
 
@@ -10,7 +9,6 @@ import API from '../api.js';
 // In charge of books?
 export default function BookShelf() {
   const { token } = useContext(UserContext)
-  // const { bookShelf, setBookShelf } = useContext(BooksContext)
   const { isLoading, error, data } = useQuery('bookshelf', () => API.getBookshelf(token))
 
   if (isLoading) return "Loading..."
