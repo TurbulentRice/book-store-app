@@ -2,23 +2,37 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import ProtectedRoute from './ProtectedRoute';
 
 import Login from '../components/Login';
-import Home from '../components/Home';
+import BookShelf from '../components/BookShelf';
+import Search from '../components/Search';
+import Navbar from '../components/Navbar';
+import BookDetails from '../components/BookDetails';
+
+import logo from '../logo.svg';
 
 export default function AppRouter() {
   return (
     <Router>
-      <Switch>
+      
+      <ProtectedRoute path="/">
+          <Navbar logo={logo} />
+      </ProtectedRoute>
 
-        <ProtectedRoute exact path="/home">
-          <Home />
-        </ProtectedRoute>
+      <Switch>
 
         <Route exact path="/login">
           <Login />
         </Route>
 
-        <Route>
-          <Redirect to="/home" />
+        <ProtectedRoute exact path="/bookshelf">
+          <BookShelf />
+        </ProtectedRoute>
+
+        <ProtectedRoute exact path="/search">
+          <Search />
+        </ProtectedRoute>
+
+        <Route path="/book/:bookID">
+          <BookDetails />
         </Route>
 
       </Switch>
