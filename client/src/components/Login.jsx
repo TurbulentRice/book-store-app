@@ -16,8 +16,10 @@ export default function Login({ logo }) {
   const handleSubmit = async e => {
     e.preventDefault()
     setIsLoading(true)
+    setErrorMessage("")
     try {
       const response = await API.login(username, password)
+      if (response.status) throw response;
       // Success - set state, clear input, redirect
       setIsLoading(false);
       setErrorMessage("");
@@ -27,13 +29,10 @@ export default function Login({ logo }) {
       history.push("/bookshelf")
     } catch (error) {
       // Fail
-      console.log(error);
       setIsLoading(false);
-      if (error.response && error.response.status === 401) {
-        setErrorMessage("Incorrect username or password")
-      } else {
-        setErrorMessage("Something went wrong...")
-      }
+      error.status === 401 
+        ? setErrorMessage(error.data.message)
+        : setErrorMessage("Something went wrong... Please try again.")
     }
   }
 

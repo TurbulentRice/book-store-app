@@ -5,7 +5,7 @@ const request = options => axios.request({
   ...options,
   headers: {...options.headers, 'Content-Type': 'application/json'}
 }).then(response => response.data)
-  .catch(error => console.log(error))
+  .catch(error => error.response)
 
 // API Methods
 const API = {
