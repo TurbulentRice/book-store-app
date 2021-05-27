@@ -7,7 +7,7 @@ import Search from '../components/Search';
 import Navbar from '../components/Navbar';
 import BookDetails from '../components/BookDetails';
 
-import logo from '../logo.svg';
+import logo from '../images/logo.svg';
 
 export default function AppRouter() {
   return (
@@ -20,7 +20,7 @@ export default function AppRouter() {
       <Switch>
 
         <Route exact path="/login">
-          <Login />
+          <Login logo={logo}/>
         </Route>
 
         <ProtectedRoute exact path="/bookshelf">
