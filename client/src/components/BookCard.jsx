@@ -19,6 +19,7 @@ export default function BookCard({ book, shelfKey }) {
       ? API.removeBook(book.id, token)
       : API.moveBook(book.id, newShelfKey, token)
   }, {
+    // Invaldiate bookshelf query to cause refetch+rerender of bookshelf
     onSuccess: () => queryClient.invalidateQueries('bookshelf')
   })
 

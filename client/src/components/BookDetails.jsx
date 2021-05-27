@@ -1,6 +1,6 @@
+import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery, useQueryClient, useMutation } from 'react-query';
-import { useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
 import imgErrorIcon from '../images/img_unavailable.png';
 import API from '../api';
@@ -11,11 +11,10 @@ export default function BookDetails() {
 
   const queryClient = useQueryClient()
   const mutation = useMutation((newShelfKey) => API.moveBook(book.id, newShelfKey, token), {
+    // Invalidate this request, causing refetch of data
     onSuccess: () => queryClient.invalidateQueries(bookID)
   })
 
-  // Maybe query "ID" should be book id?
-  // That way we can use invalidation dynamicall for each viewBook req
   const { isLoading, error, data } = useQuery(bookID, () => API.viewBook(bookID, token))
   
   if (isLoading) return "Loading..."
