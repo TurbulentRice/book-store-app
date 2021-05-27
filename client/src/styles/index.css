@@ -3,6 +3,16 @@ code {
     monospace;
 }
 
+.book-thumbnail {
+  width: auto;
+  max-height: 100px;
+}
+
+.book-card {
+  width: 280px;
+  height: 200px;
+}
+
 /* ANIMATIONS */
 
 /* Simple CSS3 Fade-in-down Animation 
