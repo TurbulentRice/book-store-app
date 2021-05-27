@@ -1,20 +1,26 @@
-import { useHistory } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { UserContext } from '../contexts/UserContext';
 import imgErrorIcon from '../images/img_unavailable.png';
 import API from '../api.js';
 
 export default function Search() {
-  const [searchString, setSearchString] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  // User context for token and keeping track of searches
+  const { token,
+    searchString, setSearchString,
+    searchResults, setSearchResults } = useContext(UserContext)
+  
+  let history = useHistory()
+  
+  // TODO
+  //
+  // Time searches, setInterval, reset every key change?
+  // On input, listen for 200ms, if interrupted by another onChange, reset counter
+  //
+
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  let history = useHistory()
-  const { token } = useContext(UserContext)
 
-  // const { isLoading, error, data, refetch } = useQuery('search', () => searchString && API.search(searchString, token))
-  // if (isLoading) return "Loading..."
-  // if (error) return "An error occurred while fetching data."
   useEffect(() => {
     errorMessage && setErrorMessage("")
     searchString && setIsLoading(true)
@@ -26,7 +32,10 @@ export default function Search() {
       })
       : setSearchResults([])
     
-  }, [searchString])
+  // Ignoring this error
+  // "React Hook useEffect has missing dependencies: 'errorMessage' and 'setSearchResults'.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchString, token])
 
   const handleOpenBook = (bookID) => {
     history.push(`book/${bookID}`)
@@ -63,6 +72,7 @@ export default function Search() {
 
             <div className="col-2">
               <img
+              onClick={() => handleOpenBook(book.id)}
               src={book.imageLinks ? book.imageLinks.thumbnail || book.imageLinks.smallThumbnail || imgErrorIcon : imgErrorIcon}
               alt={book.title || "N/A"}
               className=""/>
