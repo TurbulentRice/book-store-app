@@ -2,9 +2,8 @@ import { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { UserContext } from '../contexts/UserContext';
 import API from '../api'
-import logo from '../logo.svg';
 
-export default function Login() {
+export default function Login({ logo }) {
   const { login } = useContext(UserContext);
   const history = useHistory();
 
@@ -22,10 +21,10 @@ export default function Login() {
       // Success - set state, clear input, redirect
       setIsLoading(false);
       setErrorMessage("");
-      login(response.data.token);
+      login(response.token);
       setUsername("");
       setPassword("");
-      history.push("/home")
+      history.push("/bookshelf")
     } catch (error) {
       // Fail
       console.log(error);
@@ -71,7 +70,6 @@ export default function Login() {
             onChange={e => setPassword(e.target.value)} />
 
           <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-          <p className="mt-5 mb-3 text-muted">© 2017-2018</p>
         </form>
 
         {errorMessage && <div>{errorMessage}</div>}
