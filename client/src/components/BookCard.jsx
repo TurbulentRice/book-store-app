@@ -1,4 +1,3 @@
-// import { BooksContext } from '../contexts/BooksContext';
 import { UserContext } from '../contexts/UserContext';
 import { useHistory } from 'react-router-dom';
 import { useQueryClient, useMutation } from 'react-query';
@@ -8,7 +7,6 @@ import imgErrorIcon from '../images/img_unavailable.png';
 
 export default function BookCard({ book, shelfKey }) {
   const { token } = useContext(UserContext);
-  // const { bookShelf } = useContext(BooksContext)
   const queryClient = useQueryClient()
   let history = useHistory();
 
@@ -16,7 +14,11 @@ export default function BookCard({ book, shelfKey }) {
     history.push(`book/${book.id}`)
   }
 
-  const mutation = useMutation((newShelfKey) => API.moveBook(book.id, newShelfKey, token), {
+  const mutation = useMutation(newShelfKey => {
+    newShelfKey === 'remove'
+      ? API.removeBook(book.id, token)
+      : API.moveBook(book.id, newShelfKey, token)
+  }, {
     onSuccess: () => queryClient.invalidateQueries('bookshelf')
   })
 
@@ -25,7 +27,9 @@ export default function BookCard({ book, shelfKey }) {
       <div className="card-body p-1">
 
         {/* Book title and author(s) */}
-        <h6 className="card-title mb-0"><button className="btn btn-link text-left p-0 m-0" onClick={handleOpenBook}>{book.title}</button></h6>
+        <h6 className="card-title mb-0">
+          <button className="btn btn-link text-left p-0 m-0" onClick={handleOpenBook}>{book.title}</button>
+        </h6>
         <div className="card-text">  
           <small>
             {'by '}
@@ -57,6 +61,7 @@ export default function BookCard({ book, shelfKey }) {
               <option value="wantToRead">Want to Read</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="read">Read</option>
+              <option value="remove">Remove from shelf</option>
 
             </select>
           </div>
