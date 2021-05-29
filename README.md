@@ -4,7 +4,9 @@ Search for books, and keep track of ones you want to read, have read, and are cu
 
 Check out the [Heroku Deployment](https://novella-book-store.herokuapp.com/) to use the app, or follow instructions below to install the project and run locally.
 
-Final project for Albany Can Code: Javascript Frameworks class 2021. Written with React, Express, and a mock-backend using Google Books API for fetching book details. Coded by Sean Russell.
+Final project for Albany Can Code: Javascript Frameworks class 2021. Written with React, Express, and a mock-backend using Google Books API. Server state is managed by ReactQuery, app state uses React's Context API for keeping track info about user's session (token, recent search).
+
+Coded by Sean Russell.
 
 ## Getting started
 
