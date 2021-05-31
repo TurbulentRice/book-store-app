@@ -17,9 +17,12 @@ const API = {
       password
     }
   }),
-  logout: () => request({
+  logout: (token) => request({
     method: 'DELETE',
-    url: '/api/signout'
+    url: '/api/signout',
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
   }),
   refreshToken: () => request({
     method: 'GET',
