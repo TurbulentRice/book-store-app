@@ -1,21 +1,21 @@
+import { useContext } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import ProtectedRoute from './ProtectedRoute';
+import { UserContext } from '../contexts/UserContext';
 
+import logo from '../images/logo.svg';
+import ProtectedRoute from './ProtectedRoute';
 import Login from '../components/Login';
 import Bookshelf from '../components/Bookshelf';
 import Search from '../components/Search';
 import Navbar from '../components/Navbar';
 import BookDetails from '../components/BookDetails';
 
-import logo from '../images/logo.svg';
-
 export default function AppRouter() {
+  const { isLoggedIn } = useContext(UserContext)
   return (
     <Router>
-      
-      <ProtectedRoute path="/">
-          <Navbar logo={logo} />
-      </ProtectedRoute>
+
+      {isLoggedIn() && <Navbar logo={logo} />}
 
       <Switch>
 
@@ -31,9 +31,9 @@ export default function AppRouter() {
           <Search />
         </ProtectedRoute>
 
-        <Route path="/book/:bookID">
+        <ProtectedRoute path="/book/:bookID">
           <BookDetails />
-        </Route>
+        </ProtectedRoute>
 
       </Switch>
     </Router>
