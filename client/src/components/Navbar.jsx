@@ -5,15 +5,16 @@ import { UserContext } from '../contexts/UserContext';
 // Main search bar, persistent across all routes
 
 export default function Navbar({ logo }) {
+  const { logout } = useContext(UserContext)
   let history = useHistory();
+
   const goToSearch = () => {
     history.push('/search')
   }
   const goToBookshelf = () => {
     history.push('/bookshelf')
   }
-
-  const { logout } = useContext(UserContext)
+  
   return (
     <nav className="navbar navbar-expand navbar-light bg-light">
       <div className="navbar-brand" href="/">
