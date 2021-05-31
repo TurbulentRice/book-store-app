@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { UserContext } from '../contexts/UserContext';
 
 import logo from '../images/logo.svg';
@@ -19,7 +19,7 @@ export default function AppRouter() {
 
       <Switch>
 
-        <Route exact path="/login">
+        <Route path="/login">
           <Login logo={logo}/>
         </Route>
 
@@ -34,6 +34,8 @@ export default function AppRouter() {
         <ProtectedRoute path="/book/:bookID">
           <BookDetails />
         </ProtectedRoute>
+        
+        <Redirect to="/login"/>
 
       </Switch>
     </Router>
