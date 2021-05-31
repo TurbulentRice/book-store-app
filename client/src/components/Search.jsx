@@ -15,6 +15,8 @@ export default function Search() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const openBook = (bookID) => history.push(`book/${bookID}`)
+
   useEffect(() => {
     // Only update state if component is mounted
     // This is to prevent "Warning: Can't perform a React state update on an unmounted component."
@@ -39,10 +41,6 @@ export default function Search() {
     // "React Hook useEffect has missing dependencies: 'errorMessage' and 'setSearchResults'.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchString, token])
-
-  const handleOpenBook = (bookID) => {
-    history.push(`book/${bookID}`)
-  }
 
   return (
     <div className="container m-4">
@@ -75,14 +73,14 @@ export default function Search() {
 
             <div className="col-2">
               <img
-              onClick={() => handleOpenBook(book.id)}
+              onClick={() => openBook(book.id)}
               src={book.imageLinks ? book.imageLinks.thumbnail || book.imageLinks.smallThumbnail || imgErrorIcon : imgErrorIcon}
               alt={book.title || "N/A"}
               className=""/>
             </div>
 
             <div className="col">
-              {book.title ? <button className="btn btn-link text-left p-0 m-0" onClick={() => handleOpenBook(book.id)}><h5>{book.title}</h5></button> : <h5>{'N/A'}</h5>}
+              {book.title ? <button className="btn btn-link text-left p-0 m-0" onClick={() => openBook(book.id)}><h5>{book.title}</h5></button> : <h5>{'N/A'}</h5>}
               <p>
                 {'by '}
                 {book.authors && book.authors.map((author, index) => index === book.authors.length - 1 

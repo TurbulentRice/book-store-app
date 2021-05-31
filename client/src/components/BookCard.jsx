@@ -11,9 +11,7 @@ export default function BookCard({ book, shelfKey }) {
   const queryClient = useQueryClient()
   let history = useHistory();
 
-  const handleOpenBook = (e) => {
-    history.push(`book/${book.id}`)
-  }
+  const openBook = () => history.push(`book/${book.id}`)
 
   const mutation = useMutation(newShelfKey => {
     newShelfKey === 'remove'
@@ -30,7 +28,7 @@ export default function BookCard({ book, shelfKey }) {
 
         {/* Book title and author(s) */}
         <h6 className="card-title mb-0">
-          <button className="btn btn-link text-left p-0 m-0" onClick={handleOpenBook}>{book.title}</button>
+          <button className="btn btn-link text-left p-0 m-0" onClick={openBook}>{book.title}</button>
         </h6>
         <div className="card-text">  
           <small>
@@ -46,7 +44,7 @@ export default function BookCard({ book, shelfKey }) {
 
           {/* Thumbnail */}
           <img className="book-thumbnail m-2"
-            onClick={handleOpenBook}
+            onClick={openBook}
             src={book.imageLinks ? book.imageLinks.thumbnail || book.imageLinks.smallThumbnail || imgErrorIcon : imgErrorIcon}
             alt={book.title}/>
 
