@@ -34,8 +34,8 @@ export default function AppRouter() {
         <ProtectedRoute path="/book/:bookID">
           <BookDetails />
         </ProtectedRoute>
-        
-        <Redirect to="/login"/>
+
+        {isLoggedIn() ? <Redirect to="/login"/> : <Redirect to="/bookshelf"/>}
 
       </Switch>
     </Router>
