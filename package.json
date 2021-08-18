@@ -1,7 +1,7 @@
 {
   "name": "book-store-server",
   "author": "Sean Russell",
-  "homepage": "http://seanrusselldev.com/novella-app",
+  "homepage": "/novella-app",
   "private": true,
   "version": "1.0.0",
   "description": "",

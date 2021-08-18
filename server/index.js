@@ -59,6 +59,7 @@ app.use("/api/", authRouter);
 app.all("/api/*", fileNotFoundError);
 
 app.get("*", (req, res) => {
+  console.log('Hit novella something...', req.params[0])
   if (fs.existsSync(path.resolve(__dirname, "../client/build", "index.html"))) {
     return res.sendFile(
       path.resolve(__dirname, "../client/build", "index.html")
