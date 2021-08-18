@@ -1,6 +1,7 @@
 {
   "name": "book-store-server",
-  "author": "albanycancode",
+  "author": "Sean Russell",
+  "homepage": "http://seanrusselldev.com/novella-app",
   "private": true,
   "version": "1.0.0",
   "description": "",
