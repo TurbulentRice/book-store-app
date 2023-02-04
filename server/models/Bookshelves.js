@@ -1,5 +1,4 @@
 const cloneDeep = require("lodash.clonedeep");
-const stripHtml = require("string-strip-html").stripHtml;
 const starterBookshelves = require("../assets/starterBookshelves.json");
 
 /**
@@ -58,9 +57,7 @@ const structureBook = (bookId, volumeInfo, shelf) => {
   return {
     id: bookId,
     ...volumeInfo,
-    description: volumeInfo.description
-      ? stripHtml(volumeInfo.description).result
-      : "",
+    description: volumeInfo.description ? volumeInfo.description.result : "",
     shelf,
   };
 };
