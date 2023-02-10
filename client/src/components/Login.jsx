@@ -37,7 +37,7 @@ export default function Login({ logo }) {
   }
 
   return (
-    <div className="row justify-content-center fadeInDown">
+    <div className="d-flex justify-content-center fadeInDown">
     <div className="col-auto text-center fadeInDown">
         <form className="form-signin" onSubmit={handleSubmit}>
 
